@@ -16,9 +16,19 @@
 
           {% for color_prod in colors %}
 
-              <input checked='checked' data-col='{{ color_prod }}' id="{{ color_prod }}" type="radio" name="bl1"
+              {% if forloop.first %}
+
+                  <input checked='checked' data-col='{{ color_prod }}' id="{{ color_prod }}" type="radio" name="bl1"
                      onclick="document.getElementById('bg').style.backgroundColor = '{{ color_prod }}';" />
-              <label class="{{ color_prod }}" for="{{ color_prod }}"></label>
+                  <label class="{{ color_prod }}" for="{{ color_prod }}"></label>
+
+              {% else %}
+
+                  <input data-col='{{ color_prod }}' id="{{ color_prod }}" type="radio" name="bl1"
+                     onclick="document.getElementById('bg').style.backgroundColor = '{{ color_prod }}';" />
+                  <label class="{{ color_prod }}" for="{{ color_prod }}"></label>
+
+              {% endif %}
 
           {% endfor %}
 
@@ -30,8 +40,17 @@
 
            {% for size_prod in sizes %}
 
-               <input checked='checked' data-size="{{ size_prod }}" id="{{ size_prod.lower }}" type="radio" name="bl2" />
-               <label class="{{ size_prod.lower }}" for="{{ size_prod.lower }}">{{ size_prod }}</label>
+               {% if forloop.first %}
+
+                   <input checked='checked' data-size="{{ size_prod }}" id="{{ size_prod.lower }}" type="radio" name="bl2" />
+                   <label class="{{ size_prod.lower }}" for="{{ size_prod.lower }}">{{ size_prod }}</label>
+
+               {% else %}
+
+                   <input data-size="{{ size_prod }}" id="{{ size_prod.lower }}" type="radio" name="bl2" />
+                   <label class="{{ size_prod.lower }}" for="{{ size_prod.lower }}">{{ size_prod }}</label>
+
+               {% endif %}
 
            {% endfor %}
 
@@ -43,14 +62,25 @@
 
             {% for material_prod in materials %}
 
-                <input checked='checked' data-material="{{ material_prod }}" id="{{ material_prod  }}"
+                {% if forloop.first %}
+
+                    <input checked='checked' data-material="{{ material_prod }}" id="{{ material_prod  }}"
                        type="radio" name="bl3" />
-                <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+                    <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+
+                {% else %}
+
+                    <input data-material="{{ material_prod }}" id="{{ material_prod  }}"
+                       type="radio" name="bl3" />
+                    <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+
+                {% endif %}
 
             {% endfor %}
 
         </div>
       </div>
+      <p></p>
     </div>
   </section>
 
@@ -77,7 +107,7 @@
     color = $(this).attr(dataColor);
     $.ajax({
         type:"GET",
-            url: "/",
+            url: "http://127.0.0.1:8000/colorprice/",
             data:{
                 color: color,
                 prod: proid
