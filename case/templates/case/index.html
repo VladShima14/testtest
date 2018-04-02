@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+{% block content %}
+
+    {% for product in products %}
+
+        <h1><a href="{% url 'test_detail' pk=product.pk %}">{{ product.name }}</a></h1>
+
+
+        {% for prod in product.productdetail.all %}
+            <form>
+                <div>
+                <input type="radio" id="contactChoice1"
+                name="contact" value="email">
+                <label for="contactChoice1">{{ prod.color.name }}</label>
+            </div>
+            </form>
+        {% endfor %}
+
+
+
+
+    {% endfor %}
+
+{% endblock %}
+
+<form>
+  <p>Please select your preferred contact method:</p>
+  <div>
+    <input type="radio" id="contactChoice1"
+     name="contact" value="email">
+    <label for="contactChoice1">Email</label>
+
+    <input type="radio" id="contactChoice2"
+     name="contact" value="phone">
+    <label for="contactChoice2">Phone</label>
+
+    <input type="radio" id="contactChoice3"
+     name="contact" value="mail">
+    <label for="contactChoice3">Mail</label>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+</body>
+</html>
+
+{#<div>#}
+{#                <input type="radio" id="contactChoice1"#}
+{#                name="contact" value="email">#}
+{#                <label for="contactChoice1">{{ prod.size.name }}</label>#}
+{#            </div>#}
+{#            <div>#}
+{#                <input type="radio" id="contactChoice1"#}
+{#                name="contact" value="email">#}
+{#                <label for="contactChoice1">{{ prod.material.name }}</label>#}
+{#            </div>#}

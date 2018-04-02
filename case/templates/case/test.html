@@ -1,0 +1,106 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/static.css' %}">
+</head>
+<body>
+{{ product.name }}
+<p id="message"></p>
+
+<section>
+    <div class="block_left" id="bg"></div>
+    <div class="block_right">
+      <div class="block_color">
+        <p>Цвет:</p>
+        <div class="block1">
+
+          {% for color_prod in colors %}
+
+              <input checked='checked' data-col='{{ color_prod }}' id="{{ color_prod }}" type="radio" name="bl1"
+                     onclick="document.getElementById('bg').style.backgroundColor = '{{ color_prod }}';" />
+              <label class="{{ color_prod }}" for="{{ color_prod }}"></label>
+
+          {% endfor %}
+
+        </div>
+      </div>
+      <div class="block_size">
+        <p>Размер:</p>
+        <div class="block1">
+
+           {% for size_prod in sizes %}
+
+               <input checked='checked' data-size="{{ size_prod }}" id="{{ size_prod.lower }}" type="radio" name="bl2" />
+               <label class="{{ size_prod.lower }}" for="{{ size_prod.lower }}">{{ size_prod }}</label>
+
+           {% endfor %}
+
+        </div>
+      </div>
+      <div class="block_material">
+        <p>Материал:</p>
+        <div class="block1">
+
+            {% for material_prod in materials %}
+
+                <input checked='checked' data-material="{{ material_prod }}" id="{{ material_prod  }}"
+                       type="radio" name="bl3" />
+                <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+<script>
+    $(function() {
+  var dataColor = 'data-col';
+  var dataSize = 'data-size';
+  var dataMaterial = 'data-material';
+
+  var colorInput = ".block_color input";
+  var sizeInput = ".block_size input";
+  var materialInput = ".block_material input";
+
+  var color = $(colorInput+':checked').attr(dataColor);
+  var size = $(sizeInput+':checked').attr(dataSize);
+  var material = $(materialInput+':checked').attr(dataMaterial);
+
+  var prod_id = {{ product.id }}
+
+  $(colorInput).click(function() {
+    proid = prod_id;
+    color = $(this).attr(dataColor);
+    $.ajax({
+        type:"GET",
+            url: "/",
+            data:{
+                color: color,
+                prod: proid
+            },
+            success: function (data) {
+                $('#message').json(data);
+
+            }
+    });
+  });
+
+  $(sizeInput).click(function() {
+    size = $(this).attr(dataSize);
+    console.log(color, size, material);
+  });
+
+  $(materialInput).click(function() {
+    material = $(this).attr(dataMaterial);
+    console.log(color, size, material);
+  });
+
+
+});
+</script>
+</body>
+

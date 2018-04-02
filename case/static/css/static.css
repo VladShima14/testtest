@@ -1,0 +1,107 @@
+section {
+  margin: 50px auto;
+  background-color: white;
+  max-width: 700px;
+  height: 250px;
+}
+.block_left {
+  position: relative;
+  width: 40%;
+  height: 100%;
+  background-color: gray;
+  border: 1px solid black;
+  float: left;
+}
+.block_left:before, .block_left:after {
+  position: absolute;
+  left: 50%;
+  top: -25%;
+  content: ' ';
+  height: 150%;
+  width: 1px;
+  background-color: #333;
+}
+.block_left:before {
+  transform: rotate(48deg);
+}
+.block_left:after {
+  transform: rotate(-48deg);
+}
+.block_right {
+  width: 50%;
+  height: 100%;
+  border: 0.5px solid black;
+  padding-left: 45%;
+}
+.block_color, .block_material, .block_size {
+  display: flex;
+  margin-top: 5%;
+  align-items: center;
+}
+input {
+  display: none;
+}
+.block_color input[type="radio"]:checked + label {
+ border: 2px solid black;
+}
+.block_color label {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border: 2px solid white;
+  cursor: pointer;
+}
+.block_color .block1 {
+  margin-left: 75px;
+}
+.block_size .block1 {
+  margin-left: 60px;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+}
+.blue {
+  background-color: blue;
+}
+.block_size label {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border: 2px solid #D3D3D3;
+  cursor: pointer;
+  text-align: center;
+}
+.block1 {
+  margin-left: 10%;
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+.size_s,.size_xl   {
+  color: #D3D3D3;
+}
+.block_size input[type="radio"]:checked + label {
+ border: 2px solid black;
+}
+.block_material label {
+  width: 60px;
+  height: 20px;
+  display: block;
+  border: 2px solid #D3D3D3;
+  cursor: pointer;
+  text-align: center;
+  color: #D3D3D3;
+}
+.block_material input[type="radio"]:checked + label {
+ border: 2px solid black;
+  color: black;
+}
+
+
+
