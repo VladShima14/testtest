@@ -34,12 +34,16 @@ def product_detail(request, pk):
 
 def color_price(request):
     if request.method == 'GET':
-        prod_id = request.GET['prod']
-        color_a = request.GET['color']
+        prod_id = request.GET.get('prod')
+        color_a = request.GET.get('color')
         prod_det = ProductDetail.objects.filter(product=prod_id, color__name=color_a)
-        price_det = prod_det.values('price')
+        price_det = prod_det.values_list('price', flat=True)
+        a = 0
+        for i in price_det:
+              a += i
+
         return HttpResponse(json.dumps({
-            "price": price_det, }),
+            "price": str(a), }),
             content_type="application/json")
 
 

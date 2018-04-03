@@ -66,13 +66,13 @@
 
                     <input checked='checked' data-material="{{ material_prod }}" id="{{ material_prod  }}"
                        type="radio" name="bl3" />
-                    <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+                    <label class="{{ material_prod }}" for="{{ material_prod }}">{{ material_prod }}</label>
 
                 {% else %}
 
                     <input data-material="{{ material_prod }}" id="{{ material_prod  }}"
                        type="radio" name="bl3" />
-                    <label class="{{ material_prod  }}" for="{{ material_prod  }}">{{ material_prod  }}</label>
+                    <label class="{{ material_prod }}" for="{{ material_prod }}">{{ material_prod }}</label>
 
                 {% endif %}
 
@@ -84,8 +84,8 @@
     </div>
   </section>
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+<script>console.log("Kol");</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
     $(function() {
   var dataColor = 'data-col';
@@ -100,20 +100,22 @@
   var size = $(sizeInput+':checked').attr(dataSize);
   var material = $(materialInput+':checked').attr(dataMaterial);
 
-  var prod_id = {{ product.id }}
+  var prod_id = {{ product.id }};
+  var url = "{% url 'product_price' %}";
 
   $(colorInput).click(function() {
     proid = prod_id;
+    urlprod = url;
     color = $(this).attr(dataColor);
     $.ajax({
         type:"GET",
-            url: "http://127.0.0.1:8000/colorprice/",
+            url: urlprod,
             data:{
                 color: color,
                 prod: proid
             },
             success: function (data) {
-                $('#message').json(data);
+                $('#message').text(data.price);
 
             }
     });
